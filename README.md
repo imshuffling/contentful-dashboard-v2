@@ -1,4 +1,6 @@
-# Contentful POC dashboard
+# Contentful POC dashboard v2
+
+![image](https://user-images.githubusercontent.com/739061/129941204-9513160d-5bf6-40d9-878c-75ee2da81fed.png)
 
 This project was bootstrapped with [Create Contentful App](https://github.com/contentful/create-contentful-app).
 
