@@ -12,6 +12,7 @@ interface DashboardProps {
   // contentTypes: ContentType[];
 }
 
+
 interface CollectionsState {
   total: number | null;
   published: number | null;
@@ -27,14 +28,14 @@ export default function Page({ sdk, contentTypes }: DashboardProps) {
     recent: null
   });
 
-  //  TODO Get user tag based on current logged in USER
-  //  Use variable when creating new entry
-  //  user.spaceMembership.roles // user.tag???
-  // const getUserRole = () => {
-  //   if (sdk.user.spaceMembership.admin === false ) {
-
-  //   }
-  // }
+  // TODO
+  const getAllTags = () => {
+    sdk.space.readTags(0, 100).then((tags) => {
+      // console.log(tags);
+      const newTags = tags.items.map(tag => tag.name)
+      console.log(newTags);
+    });
+  }
 
   const userRolesToTagIds = () => {
     const userRoles = sdk.user.spaceMembership.roles // Current logged in user role e.g. "Country: FR" Role
@@ -82,6 +83,7 @@ export default function Page({ sdk, contentTypes }: DashboardProps) {
           .catch(() => 0),
       ]);
 
+      console.log("data", data)
       // console.log(sdk.user.spaceMembership.roles)
 
       setData({ ...data, total, published, scheduled });
@@ -92,11 +94,18 @@ export default function Page({ sdk, contentTypes }: DashboardProps) {
         .then((entries) => entries.items)
         .catch(() => []);
 
+      // Fetch all posts tagged with Country: UK id
+      const allPostsTaggedWithUK = await sdk.space
+        .getEntries({ 'sys.contentType.sys.id': "post", limit: 10, 'metadata.tags.sys.id[all]': 'countryUk' })
+        .then((entries) => entries.items)
+        .catch(() => []);
+
       // Set the final data. Loading complete.
-      setData({ total, published, scheduled, recent });
+      setData({ total, published, scheduled, recent, allPostsTaggedWithUK });
     }
 
     fetchData();
+    getAllTags();
   }, []);
 
   return (
@@ -129,6 +138,12 @@ export default function Page({ sdk, contentTypes }: DashboardProps) {
         <CollectionList
           // contentTypes={contentTypes}
           entries={data.recent}
+          onClickItem={(entryId) => sdk.navigator.openEntry(entryId)}
+        />
+        <Heading className="f36-margin-top--xl" element="h2">All Posts tagged with Country UK</Heading>
+        <Paragraph></Paragraph>
+        <CollectionList
+          entries={data.allPostsTaggedWithUK}
           onClickItem={(entryId) => sdk.navigator.openEntry(entryId)}
         />
       </div>

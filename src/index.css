@@ -12,3 +12,34 @@ div {
 .poc-table td {
   vertical-align: middle;
 }
+
+.ctf-workflows-tag-NRI-gHosZsKm_AA6SnrBD {
+  background-color: rgb(245, 186, 58);
+  margin-top: 4px;
+  border-radius: 2px;
+  width: 12px;
+  height: 12px;
+  margin-right: 0.5rem;
+}
+
+.ctf-workflows-tag-io8LB_6CtVSd59F0LEO3h {
+  background-color: rgb(73, 161, 113);
+  margin-top: 4px;
+  border-radius: 2px;
+  width: 12px;
+  height: 12px;
+  margin-right: 0.5rem;
+}
+
+.ctf-workflows-tag-_n9nvHgUJBYD_o0yTQVY_ {
+  background-color: rgb(22, 36, 65);
+  margin-top: 4px;
+  border-radius: 2px;
+  width: 12px;
+  height: 12px;
+  margin-right: 0.5rem;
+}
+
+.cr-pointer {
+  cursor: pointer;
+}
